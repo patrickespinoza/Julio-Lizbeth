@@ -1,93 +1,185 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Celebracion from "./componentes-encabezado/ubicacion";
 import Vestimenta from "./componentes-encabezado/vestimenta";
 import Intinerario2 from "./componentes-encabezado/itinerario2";
-import Novios from "./componentes-encabezado/novios";
+import Confirmacion from "./componentes-encabezado/Confirmacion";
 
 export default function Itinerario() {
+  const audioRef = useRef(null);
+  const [mostrarModal, setMostrarModal] = useState(true);
+  const [musicaActiva, setMusicaActiva] = useState(false);
+
+  const activarMusica = () => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.5;
+      audioRef.current.play().catch((error) => {
+        console.error("Error al reproducir música:", error);
+      });
+    }
+
+    setMusicaActiva(true);
+    setMostrarModal(false);
+  };
+
+  const rechazarMusica = () => {
+    setMostrarModal(false);
+    setMusicaActiva(false);
+  };
+
+  const toggleMusica = () => {
+    if (!audioRef.current) return;
+
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+      setMusicaActiva(true);
+    } else {
+      audioRef.current.pause();
+      setMusicaActiva(false);
+    }
+  };
 
   return (
-    <div>
+    <div className="relative bg-[#050505]">
+      <audio ref={audioRef} src="/musica.mp3" loop />
 
-{/* SECCIÓN VESTIMENTA */}
-      <Novios />
-      {/* SECCIÓN CELEBRACIONES */}
-      <div className="grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+      {mostrarModal && (
+        <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm flex items-center justify-center px-6">
+          <div
+            className="
+              w-full max-w-md
+              bg-gradient-to-br from-[#090909] via-[#111111] to-[#1A1207]
+              border border-[#D6B46A]/60
+              rounded-tl-[4rem]
+              rounded-br-[4rem]
+              rounded-tr-[1rem]
+              rounded-bl-[1rem]
+              shadow-[0_20px_70px_rgba(0,0,0,0.85)]
+              p-8 text-center
+            "
+          >
+            <p className="uppercase tracking-[0.35em] text-[#D6B46A] text-xs font-light">
+              Experiencia con música
+            </p>
 
+            <h2 className="font-playfair text-[#F8F1DC] text-4xl mt-5">
+              ¿Deseas activar la música?
+            </h2>
+
+            <div className="w-24 h-px bg-[#D6B46A] mx-auto my-6"></div>
+
+            <p className="text-white/70 leading-relaxed text-base">
+              Esta invitación contiene música para disfrutar mejor la
+              experiencia.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+              <button
+                onClick={activarMusica}
+                className="
+                  bg-[#D6B46A] text-black
+                  border border-[#D6B46A]
+                  rounded-full px-6 py-3
+                  uppercase tracking-[0.18em]
+                  text-xs
+                  hover:bg-transparent hover:text-[#D6B46A]
+                  transition duration-300
+                "
+              >
+                Activar
+              </button>
+
+              <button
+                onClick={rechazarMusica}
+                className="
+                  bg-transparent text-[#D6B46A]
+                  border border-[#D6B46A]/60
+                  rounded-full px-6 py-3
+                  uppercase tracking-[0.18em]
+                  text-xs
+                  hover:bg-[#D6B46A] hover:text-black
+                  transition duration-300
+                "
+              >
+                No activar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {!mostrarModal && (
+        <button
+          onClick={toggleMusica}
+          className="
+            fixed bottom-5 right-5 z-[9998]
+            w-12 h-12 rounded-full
+            bg-[#D6B46A] text-black
+            border border-[#D6B46A]
+            shadow-[0_10px_30px_rgba(214,180,106,0.35)]
+            flex items-center justify-center
+            text-lg
+            hover:bg-black hover:text-[#D6B46A]
+            transition duration-300
+          "
+        >
+          {musicaActiva ? "♪" : "×"}
+        </button>
+      )}
+
+      <div className="overflow-hidden">
         <Celebracion
           titulo="Ceremonia"
-          dia="Jueves"
-          fecha="11"
-          mesAnio="Junio 2026"
-          hora="4:30 PM"
-          lugar="Salón Event Center"
-          direccion="Puebla, Puebla"
-          ubicacion="https://maps.app.goo.gl/TsSDUBKAractwi8F8"
+          dia="Sabado"
+          fecha="03"
+          mesAnio="Octubre 2026"
+          hora="2:00 PM"
+          lugar="Mariscos/Terraza Neptuno"
+          direccion="ORQUIDEA 550-69 SANTA CRUZ DE LAS FLORES, 45640 Tlajomulco de Zúñiga, Jal."
+          ubicacion="https://maps.app.goo.gl/AGLwJH2TzsHSRzM88"
         />
-
-        <Celebracion
-          titulo="Recepción"
-          hora="8:00 PM"
-          lugar="Jardín Magnolia"
-          direccion="Atlixco, Puebla"
-          ubicacion="https://maps.app.goo.gl/TsSDUBKAractwi8F8"
-        />
-
       </div>
 
-      {/* SECCIÓN VESTIMENTA */}
       <Vestimenta />
 
-      {/* SECCIÓN ITINERARIO */}
-      <Intinerario2/>
+      <Intinerario2 />
 
-      {/* CONFIRMACIÓN */}
-
-      {/* IMAGEN FINAL */}
-      <div className="flex flex-col items-center justify-center bg-[#F7F4ED]">
-
+      <div className="relative w-full flex justify-center bg-[#050505] overflow-hidden">
         <img
-          src="/finalboda.webp"
-          alt="acepto"
-          className="w-full max-w-5xl object-cover"
+          src="/final.jpg"
+          alt="Final"
+          className="w-full max-w-6xl object-cover"
         />
 
-      </div>
-      <div className="flex flex-col items-center justify-center gap-3 py-24 px-6 bg-[#5E6650] text-white">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-        <h1 className="text-xl sm:text-3xl font-bold font-playfair text-center">
-          CONFIRMAR ASISTENCIA
-        </h1>
+        <div className="absolute inset-0 flex items-end justify-center pb-12 sm:pb-20 px-8 text-center">
+          <div className="max-w-3xl">
+            <p className="uppercase tracking-[0.45em] text-[#D6B46A] text-xs sm:text-sm mb-6">
+              Gracias por acompañarnos
+            </p>
 
-        <img
-          className="h-24 w-24 sm:h-28 sm:w-28 p-3"
-          src="/anillos-de-boda.png"
-          alt="dress code"
-        />
-
-        <p className="text-lg sm:text-2xl text-center font-cursiveDancing max-w-xl">
-          Confirma tu asistencia antes del 20 de diciembre
-        </p>
-
-        <button
-          className="
-            mt-4 bg-[#B89B5E]
-            rounded-full px-8 py-4
-            flex items-center justify-center
-            text-lg text-white
-            hover:scale-105 transition
-            shadow-lg
-          "
-          onClick={() =>
-            window.location.href =
-              "https://docs.google.com/forms/d/e/1FAIpQLSdWWDOUbW7aS_g6uzvas71apTg0ub0Aw8DG5GQf9_9a9jaJZA/viewform?usp=header"
-          }
-        >
-          Confirmar Asistencia
-        </button>
-
+            <h2
+              className="
+                font-playfair
+                text-white
+                text-3xl
+                sm:text-5xl
+                md:text-6xl
+                leading-tight
+                drop-shadow-[0_5px_18px_rgba(0,0,0,0.6)]
+              "
+            >
+              "Esta historia llena de amor y
+              <br />
+              felicidad que estamos por iniciar,
+              <br />
+              queremos que seas parte de ella."
+            </h2>
+          </div>
+        </div>
       </div>
 
+      <Confirmacion />
     </div>
   );
 }

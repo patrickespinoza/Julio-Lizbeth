@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const Vestimenta = () => {
-
   const fadeUp = {
     hidden: {
       opacity: 0,
@@ -18,8 +17,7 @@ const Vestimenta = () => {
   };
 
   return (
-    <div className="w-full bg-[#F7F4ED] py-2 px-0 flex items-center justify-center overflow-hidden">
-
+    <div className="w-full bg-[#050505] py-6 px-0 flex items-center justify-center overflow-hidden">
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -27,18 +25,21 @@ const Vestimenta = () => {
         viewport={{ once: true }}
         className="
           relative max-w-6xl w-full
-          bg-white
+          bg-gradient-to-br from-[#090909] via-[#111111] to-[#1A1207]
           rounded-tl-[3rem] sm:rounded-tl-[4rem]
           rounded-br-[3rem] sm:rounded-br-[4rem]
           rounded-tr-[1rem]
           rounded-bl-[1rem]
-          shadow-[0_15px_50px_rgba(0,0,0,0.12)]
+          shadow-[0_20px_70px_rgba(0,0,0,0.75)]
+          border border-[#D6B46A]/50
           overflow-hidden
           grid grid-cols-1 lg:grid-cols-2
         "
       >
+        {/* Línea dorada superior */}
+        <div className="absolute top-5 left-1/2 -translate-x-1/2 w-28 h-[1px] bg-[#D6B46A] z-20"></div>
 
-        {/* IMAGEN */}
+        {/* IMAGEN - SIN TOCAR */}
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -53,9 +54,8 @@ const Vestimenta = () => {
             min-h-[300px]
           "
         >
-
           <img
-            src="/dress-code2.png"
+            src="/dresscode.png"
             alt="Vestimenta"
             className="
               w-full h-full
@@ -66,12 +66,12 @@ const Vestimenta = () => {
 
           {/* Overlay elegante */}
           <div className="absolute inset-0 bg-black/10"></div>
-
         </motion.div>
 
         {/* TEXTO */}
         <div
           className="
+            relative
             flex flex-col items-center justify-center
             text-center
             p-8
@@ -79,19 +79,18 @@ const Vestimenta = () => {
             lg:p-16
           "
         >
-
           <motion.p
             initial={{ opacity: 0, letterSpacing: "0.5em" }}
-            whileInView={{ opacity: 1, letterSpacing: "0.2em" }}
+            whileInView={{ opacity: 1, letterSpacing: "0.28em" }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
             className="
               uppercase
               text-[11px]
               sm:text-sm
-              tracking-[0.2em]
-              text-[#B89B5E]
-              font-semibold
+              tracking-[0.28em]
+              text-[#D6B46A]
+              font-light
             "
           >
             Código de Vestimenta
@@ -108,9 +107,10 @@ const Vestimenta = () => {
               md:text-5xl
               lg:text-6xl
               font-playfair
-              text-black
+              text-[#F8F1DC]
               mt-5
               leading-tight
+              drop-shadow-[0_5px_18px_rgba(214,180,106,0.22)]
             "
           >
             Vestimenta Formal
@@ -118,10 +118,10 @@ const Vestimenta = () => {
 
           <motion.div
             initial={{ width: 0 }}
-            whileInView={{ width: "6rem" }}
+            whileInView={{ width: "7rem" }}
             transition={{ duration: 1, delay: 0.4 }}
             viewport={{ once: true }}
-            className="h-[2px] bg-[#B89B5E] mt-6"
+            className="h-[1px] bg-[#D6B46A] mt-6"
           />
 
           <motion.p
@@ -131,39 +131,24 @@ const Vestimenta = () => {
             viewport={{ once: true }}
             className="
               mt-6 sm:mt-8
-              text-base
-              sm:text-lg
-              md:text-xl
-              text-black/70
+              text-xl
+              sm:text-2xl
+              md:text-3xl
+              text-[#D6B46A]
               leading-relaxed
               max-w-md
-              font-[DancingScript]
+              font-cursiveDancing
             "
           >
-            Queremos compartir contigo una noche elegante y especial.
-            Te invitamos a asistir con vestimenta formal para celebrar
-            juntos este momento inolvidable.
+            Hemos decidido que esta celebración sea exclusivamente para adultos.
+            Agradecemos tu comprensión.
           </motion.p>
 
-          {/* FRASE */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            viewport={{ once: true }}
-            className="
-              mt-8 sm:mt-10
-              text-[#B89B5E]
-              text-xs sm:text-sm
-              tracking-[0.2em]
-              text-center
-            "
-          >
-            ✦ Elegancia • Glamour • Celebración ✦
-          </motion.div>
-
+          <div className="w-20 h-[1px] bg-[#D6B46A]/70 mt-8"></div>
         </div>
 
+        {/* Línea dorada inferior */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-28 h-[1px] bg-[#D6B46A] z-20"></div>
       </motion.div>
     </div>
   );
