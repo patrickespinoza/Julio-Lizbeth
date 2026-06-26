@@ -163,8 +163,8 @@ export default function Itinerario() {
                 font-playfair
                 text-white
                 text-3xl
-                sm:text-5xl
-                md:text-6xl
+                sm:text-2xl
+                md:text-3xl
                 leading-tight
                 drop-shadow-[0_5px_18px_rgba(0,0,0,0.6)]
               "
