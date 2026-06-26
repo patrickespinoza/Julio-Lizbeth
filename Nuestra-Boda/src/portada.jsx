@@ -27,7 +27,7 @@ export default function Portada() {
         <img
           src="/portada.jpg"
           alt="Portada"
-          className="absolute inset-0 w-[100%] h-[90%] md:hidden"
+          className="absolute inset-0 w-[100%] h-[80%] md:hidden"
         />
 
         {/* DESKTOP */}
