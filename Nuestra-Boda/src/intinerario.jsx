@@ -162,7 +162,7 @@ export default function Itinerario() {
               className="
                 font-playfair
                 text-white
-                text-3xl
+                text-lg
                 sm:text-2xl
                 md:text-3xl
                 leading-tight
