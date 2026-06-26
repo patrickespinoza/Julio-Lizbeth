@@ -153,7 +153,7 @@ export default function Itinerario() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
         <div className="absolute inset-0 flex items-end justify-center pb-12 sm:pb-20 px-8 text-center">
-          <div className="max-w-3xl">
+          <div className="max-w-xl">
             <p className="uppercase tracking-[0.45em] text-[#D6B46A] text-xs sm:text-sm mb-6">
               Gracias por acompañarnos
             </p>
